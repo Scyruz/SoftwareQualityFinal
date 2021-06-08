@@ -76,5 +76,12 @@ public class BookStoreAPIStepDefs {
 		assertEquals(false, root.path(token).isMissingNode());
 	}
 	
+	@And("a {string} property is {string}")
+	public void a_token_property_is_null(String token, String missing) throws IOException {
+		ObjectMapper mapper = new ObjectMapper();
+		JsonNode root = mapper.readTree(response.getBody());
+		assertEquals(true, root.path(missing).isMissingNode());
+	}
+	
 	
 }
