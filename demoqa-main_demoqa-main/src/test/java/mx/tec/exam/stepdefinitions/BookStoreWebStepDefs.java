@@ -45,4 +45,13 @@ public class BookStoreWebStepDefs {
         assertEquals(pageTitle, title);
         driver.quit();
     }
+	
+	@Then("the message {string} is displayed")
+	public void the_message_is_displayed(String errorMsg) throws InterruptedException {
+        Thread.sleep(5000);
+
+		String message = driver.findElement(By.xpath("//*[@id=\"output\"]/div")).getText();        
+	        assertEquals(errorMsg, message);
+	        driver.quit();
+	}
 }
