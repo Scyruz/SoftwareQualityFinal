@@ -54,4 +54,14 @@ public class BookStoreWebStepDefs {
 	        assertEquals(errorMsg, message);
 	        driver.quit();
 	}
+	
+	@Then("credentials border color are {string}")
+	public void credentials_border_color_are(String color) throws InterruptedException {
+        Thread.sleep(5000);
+        
+	    String borderColor = driver.findElement(By.xpath("//*[@id=\"userName\"]")).getCssValue("border-color");        
+	    
+        assertEquals(color, borderColor);
+        driver.quit();
+	}
 }
