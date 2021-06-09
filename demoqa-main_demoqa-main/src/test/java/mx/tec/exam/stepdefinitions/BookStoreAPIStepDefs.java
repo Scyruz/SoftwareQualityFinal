@@ -83,5 +83,19 @@ public class BookStoreAPIStepDefs {
 		assertEquals(true, root.path(missing).isMissingNode());
 	}
 	
+	@When("the client calls \\/BookStore\\/v1\\/Book with ISBN {string}")
+	public void the_client_calls_bookStore_v1_book_with_isbn(String isbn) {	
+		HttpEntity<Map<String, String>> entity = new HttpEntity<Map<String, String>>(null, headers);
+		response = restTemplate.exchange("https://demoqa.com/BookStore/v1/Book?ISBN=" + isbn,
+				HttpMethod.GET, entity, String.class);
+	}
+	
+	@And("the client receives the book title of {string}")
+	public void the_client_receives_the_book_title_of(String title) throws IOException {
+		ObjectMapper mapper = new ObjectMapper();
+		JsonNode root = mapper.readTree(response.getBody());
+		assertEquals(title, root.path("title").asText());
+	}
+	
 	
 }

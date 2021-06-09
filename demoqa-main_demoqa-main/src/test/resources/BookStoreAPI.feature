@@ -17,5 +17,10 @@ Feature: Book Store Web API
     When the client calls /Account/v1/GenerateToken with username 'kikelink' and password 'Admin124!'
     Then the client receives status code of 200
     And a 'token' property is 'null' 
-
     
+  Scenario: Get book title by ISBN
+    Given an existing user
+    When the client calls /BookStore/v1/Book with ISBN '9781449325862'
+    Then the client receives status code of 200
+    And the client receives the book title of 'Git Pocket Guide'
+  
